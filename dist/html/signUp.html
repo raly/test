@@ -20,8 +20,8 @@
           <!--点击添加照片-->
           <div class="left_col">
             <div class="photo_wrap">
-              <input type="file"/>
-              <!--添加的图片展示在这里,默认隐藏--><img src="xxx.png"/>
+              <input type="file" id="imgput"/>
+              <!--添加的图片展示在这里,默认隐藏--><img src="xxx.png" id="imgshow"/>
             </div>
           </div>
           <!--选择参与类型-->
@@ -60,4 +60,37 @@
       </form>
     </section>
   </div>
+  <script>
+    var img =  document.getElementById("imgshow");
+      document.body.appendChild(img);
+      var reader = new FileReader();
+      input = document.getElementById("imgput");
+      var onchange = function(){
+          var files = input.files;
+          for(var k=0;k<files.length;k++){
+              if(!/image\/\w+/.test(files[k].type)){
+                  console.log(files[k].name+"不是图像文件!");
+              }else{
+                  //此处可加入文件上传的代码
+                  console.log(files[k].name+"文件已上传")
+              }
+          }
+          reader.readAsDataURL(files[0]);
+          reader.onload = function(){
+              img.src = this.result;
+          }           
+      }
+      input.onchange = onchange;
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  </script>
 </body>

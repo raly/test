@@ -127,8 +127,8 @@ function  initPage(){
     // var model4=msp.find(".model4");
     var curIndex=0;
     function refreshModel(){
-        curIndex=curIndex==-1 ? 3 : curIndex;
-        curIndex=curIndex==4 ? 0 : curIndex;
+        curIndex=curIndex==-1 ? 2 : curIndex;
+        curIndex=curIndex==3 ? 0 : curIndex;
         msp.find(".model-wrap").eq(curIndex).addClass("show").siblings().removeClass("show");
         msp.find(".model-wrap").removeClass("show-con");
     }

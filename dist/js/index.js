@@ -1,44 +1,68 @@
 function indexAnima(){
-    var cityImg,maskImg,canvasCity,canvasCity_ctx,bodyWidth;
+    var cityImg,maskImg_out,maskImg_inner,canvasCity,canvasCity_ctx,canvasCity_ctx1,bodyWidth;
         canvasCity=document.getElementById("city");
+        canvasCity1=document.getElementById("city1");
         bodyWidth = document.body.clientWidth;
-        canvasCity.width = bodyWidth;
-        canvasCity.height = bodyWidth;
+        canvasCity.width=canvasCity1.width = bodyWidth;
+        canvasCity.height=canvasCity1.height = bodyWidth;
     canvasCity_ctx=canvasCity.getContext("2d");
+    canvasCity_ctx1=canvasCity1.getContext("2d");
     cityImg=new Image();
     cityImg.onload=function(){
-        maskImg=new Image();
-        maskImg.onload=function(){
-            function getDegressMaskData(degress){
-                var maskCanvas=document.createElement("canvas");
-                maskCanvas.width=canvasCity.width;
-                maskCanvas.height=canvasCity.height;
-                var maskCanvas_ctx=maskCanvas.getContext("2d"); 
-                maskCanvas_ctx.translate(maskCanvas.width/2,maskCanvas.height/2)
-                maskCanvas_ctx.rotate(degress*Math.PI/180);
-                maskCanvas_ctx.translate(maskCanvas.width/-2,maskCanvas.height/-2)
-                maskCanvas_ctx.drawImage(maskImg,0,0,maskImg.width,maskImg.height,0,0,maskCanvas.width,maskCanvas.height);
-                //rentrun base 64
-                var imgBase64=maskCanvas_ctx.getImageData(0,0,maskCanvas.width,maskCanvas.height);
-                maskCanvas_ctx.clearRect(0,0,maskCanvas.width,maskCanvas.height);
-                return imgBase64;
-            }
-            var i=0;
-            var index=$(".index");
-            function run(){
-                if(index.hasClass("current")){
-                    canvasCity_ctx.globalCompositeOperation="source-over";
-                    var base64=getDegressMaskData(i++);
-                    canvasCity_ctx.putImageData(base64,0,0);  
-                    canvasCity_ctx.globalCompositeOperation="source-in";
-                    canvasCity_ctx.drawImage(cityImg,0,0,cityImg.width,cityImg.height,0,0,canvasCity.width,canvasCity.height);
-                }
-                requestAnimationFrame(run)
+        maskImg_out=new Image();
+        maskImg_out.onload=function(){
+          maskImg_inner=new Image();
+          maskImg_inner.onload=function(){
+              function getDegressMaskData(img,degress){
+                  var maskCanvas=document.createElement("canvas");
+                  maskCanvas.width=canvasCity.width;
+                  maskCanvas.height=canvasCity.height;
+                  var maskCanvas_ctx=maskCanvas.getContext("2d"); 
+                  maskCanvas_ctx.translate(maskCanvas.width/2,maskCanvas.height/2)
+                  maskCanvas_ctx.rotate(degress*Math.PI/180);
+                  maskCanvas_ctx.translate(maskCanvas.width/-2,maskCanvas.height/-2)
+                  maskCanvas_ctx.drawImage(img,0,0,img.width,img.height,0,0,maskCanvas.width,maskCanvas.height);
+                  //rentrun base 64
+                  var imgBase64=maskCanvas_ctx.getImageData(0,0,maskCanvas.width,maskCanvas.height);
+                  maskCanvas_ctx.clearRect(0,0,maskCanvas.width,maskCanvas.height);
+                  return imgBase64;
+              }
+              var i=-30;
+              var z=30;
+              var index=$(".index");
 
+              var status1=true;
+              var status2=true;
+              function run(){
+                  if(index.hasClass("current")){
+                      //canvasCity_ctx
+                      canvasCity_ctx.globalCompositeOperation="source-over";
+                      if(i==-30){status1=true}else if(i==30){status1=false};
+                      status1 ? (i++) : (i--);
+                      console.log(status1+"--"+i)
+                      var base64=getDegressMaskData(maskImg_out,i);
+                      canvasCity_ctx.putImageData(base64,0,0);  
+                      canvasCity_ctx.globalCompositeOperation="source-in";
+                      canvasCity_ctx.drawImage(cityImg,0,0,cityImg.width,cityImg.height,0,0,canvasCity.width,canvasCity.height);
+                      //canvasCity_ctx1
+                       canvasCity_ctx1.globalCompositeOperation="source-over";
+                      if(z==30){status1=true}else if(z==-30){status1=false};
+                      status1 ? (z--) : (z++);
+                      var base64=getDegressMaskData(maskImg_inner,z);
+                      canvasCity_ctx1.putImageData(base64,0,0);  
+                      canvasCity_ctx1.globalCompositeOperation="source-in";
+                      canvasCity_ctx1.drawImage(cityImg,0,0,cityImg.width,cityImg.height,0,0,canvasCity1.width,canvasCity1.height);
+                      
+                  }
+                  requestAnimationFrame(run)
+
+              }
+              requestAnimationFrame(run);
             }
-            requestAnimationFrame(run)
+            //over
+            maskImg_inner.src="../img/mask_inner.png";
         };
-        maskImg.src="../img/mask.png";
+        maskImg_out.src="../img/mask_out.png";
     }
     cityImg.src="../img/city.jpg";
 }
@@ -108,7 +132,7 @@ function  initPage(){
     tab1.on("change",function(){
         $('#slide li').eq(this.curPage).addClass("anima").siblings().removeClass("anima");
     })
-    $(".g_arrow,.view .btn").bind("touchstart",function(){
+    $(".view .btn").bind("touchstart",function(){
         tab1.next();
     })
     //index  交互
@@ -161,7 +185,7 @@ if(window.DeviceOrientationEvent) {
             var num=(gamma-0+50);
             num=num>100? 100 :num;
             num=num<0? 0 : num;
-            car_list.style.backgroundPosition=num+"% 50%"
+            car_list.style.backgroundPosition=Math.floor(num)+"% 50%"
         }
         //dataContainerOrientation.innerHTML = 'alpha: ' + alpha + '<br/>beta: ' + beta + '<br />gamma: ' + gamma;
         //dataContainerOrientation.innerHTML = 'alpha: ' + alpha + '<br/>beta: ' + beta + '<br />gamma: ' + gamma;

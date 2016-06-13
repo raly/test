@@ -247,11 +247,11 @@ function indexAnima(){
                       canvasCity_ctx1.drawImage(cityImg,0,0,cityImg.width,cityImg.height,0,0,canvasCity1.width,canvasCity1.height);
                       
                   }
-                  requestAnimationFrame(run)
+                  // requestAnimationFrame(run)
 
               }
-              requestAnimationFrame(run);
-              // setInterval(run,10)
+              // requestAnimationFrame(run);
+              setInterval(run,8)
             }
             //over
             maskImg_inner.src="../img/mask_inner.png";

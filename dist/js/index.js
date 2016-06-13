@@ -203,8 +203,8 @@ function indexAnima(){
                   maskCanvas_ctx.clearRect(0,0,maskCanvas.width,maskCanvas.height);
                   return imgBase64;
               }
-              var i=-30;
-              var z=30;
+              var i=-60;
+              var z=60;
               var index=$(".index");
 
               var status1=true;
@@ -216,17 +216,15 @@ function indexAnima(){
                       canvasCity_ctx.globalCompositeOperation="source-over";
                       start++;
                       
-                      if(i<=-30){status1=true;start=0;}else if(i>=30){status1=false;start=0;};
+                      if(i<=-60){status1=true;start=0;}else if(i>=60){status1=false;start=0;};
                       
                       if(status1){
                         i++;
-                      var top = Tween.Sine.easeOut(start, i, 30 - i, during);
+                      var top = Tween.Bounce.easeOut(start, i, 60 - i, during);
                       }else{
                         i--;
-                      var top = Tween.Sine.easeOut(start, i, 30 + i, during);
+                      var top = Tween.Bounce.easeOut(start, i, 60 + i, during);
                       }
-
-                      console.log(status1+"--"+top)
                       var base64=getDegressMaskData(maskImg_out,top);
                       canvasCity_ctx.putImageData(base64,0,0);  
                       canvasCity_ctx.globalCompositeOperation="source-in";
@@ -234,14 +232,14 @@ function indexAnima(){
                       //canvasCity_ctx1
                        canvasCity_ctx1.globalCompositeOperation="source-over";
                        start2++;
-                      if(z==30){status1=true;start2=0;}else if(z==-30){status1=false;start2=0;};
+                      if(z==60){status1=true;start2=0;}else if(z==-60){status1=false;start2=0;};
                       // status1 ? (z--) : (z++);
                       if(status1){
                         z--;
-                        var top2 = Tween.Sine.easeOut(start2, z, 30 + z, during);
+                        var top2 = Tween.Bounce.easeOut(start2, z, 60 + z, during);
                       }else{
                         z++;
-                        var top2 = Tween.Sine.easeOut(start2, z, 30 - z, during);
+                        var top2 = Tween.Bounce.easeOut(start2, z, 60 - z, during);
                       }
                       var base64=getDegressMaskData(maskImg_inner,top2);
                       canvasCity_ctx1.putImageData(base64,0,0);  
@@ -249,11 +247,11 @@ function indexAnima(){
                       canvasCity_ctx1.drawImage(cityImg,0,0,cityImg.width,cityImg.height,0,0,canvasCity1.width,canvasCity1.height);
                       
                   }
-                  // requestAnimationFrame(run)
+                  requestAnimationFrame(run)
 
               }
-              // requestAnimationFrame(run);
-              setInterval(run,20)
+              requestAnimationFrame(run);
+              // setInterval(run,10)
             }
             //over
             maskImg_inner.src="../img/mask_inner.png";

@@ -209,53 +209,51 @@ function indexAnima(){
 
               var status1=true;
               var status2=true;
-              var start = 0,start2 =0, during = 60;
-              var top;
-              var top2;
+              var start = 0,start2=0, during = 100;
               function run(){
                   if(index.hasClass("current")){
                       //canvasCity_ctx
                       canvasCity_ctx.globalCompositeOperation="source-over";
                       start++;
                       
-                      if(i==-30){status1=true;start = 0;}else if(i==30){status1=false;start = 0;};
-                      // status1 ? (i++) : (i--);
+                      if(i<=-30){status1=true;start=0;}else if(i>=30){status1=false;start=0;};
+                      
                       if(status1){
-                        ++i;
-                        top = Tween.Quart.easeInOut(start, i,30-i, 100);
+                        i++;
+                      var top = Tween.Sine.easeOut(start, i, 30 - i, during);
                       }else{
-                        --i;
-                         
-                        top = Tween.Quart.easeInOut(start, i,i+30, 100);
+                        i--;
+                      var top = Tween.Sine.easeOut(start, i, 30 + i, during);
                       }
-                      
-                      
-                      console.log(status1+"^^^^^"+top)
+
+                      console.log(status1+"--"+top)
                       var base64=getDegressMaskData(maskImg_out,top);
                       canvasCity_ctx.putImageData(base64,0,0);  
                       canvasCity_ctx.globalCompositeOperation="source-in";
                       canvasCity_ctx.drawImage(cityImg,0,0,cityImg.width,cityImg.height,0,0,canvasCity.width,canvasCity.height);
                       //canvasCity_ctx1
                        canvasCity_ctx1.globalCompositeOperation="source-over";
-                      if(z==30){status1=true;start2 = 0;}else if(z==-30){status1=false;start2 = 0;};
-                      start2++;
+                       start2++;
+                      if(z==30){status1=true;start2=0;}else if(z==-30){status1=false;start2=0;};
+                      // status1 ? (z--) : (z++);
                       if(status1){
-                        --z;
-                        top2 = Tween.Quart.easeInOut(start, z,30+z, 100);
+                        z--;
+                        var top2 = Tween.Sine.easeOut(start2, z, 30 + z, during);
                       }else{
-                        ++z;
-                        top2 = Tween.Quart.easeInOut(start, z,30-z, 100);
-                      } 
+                        z++;
+                        var top2 = Tween.Sine.easeOut(start2, z, 30 - z, during);
+                      }
                       var base64=getDegressMaskData(maskImg_inner,top2);
                       canvasCity_ctx1.putImageData(base64,0,0);  
                       canvasCity_ctx1.globalCompositeOperation="source-in";
                       canvasCity_ctx1.drawImage(cityImg,0,0,cityImg.width,cityImg.height,0,0,canvasCity1.width,canvasCity1.height);
                       
                   }
-                  requestAnimationFrame(run)
+                  // requestAnimationFrame(run)
 
               }
-              requestAnimationFrame(run);
+              // requestAnimationFrame(run);
+              setInterval(run,20)
             }
             //over
             maskImg_inner.src="../img/mask_inner.png";

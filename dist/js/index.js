@@ -220,10 +220,10 @@ function indexAnima(){
                       
                       if(status1){
                         i++;
-                      var top = Tween.Bounce.easeOut(start, i, 60 - i, during);
+                      var top = Tween.Bounce.easeIn(start, i, 60 - i, during);
                       }else{
                         i--;
-                      var top = Tween.Bounce.easeOut(start, i, 60 + i, during);
+                      var top = Tween.Bounce.easeIn(start, i, 60 + i, during);
                       }
                       var base64=getDegressMaskData(maskImg_out,top);
                       canvasCity_ctx.putImageData(base64,0,0);  
@@ -236,10 +236,10 @@ function indexAnima(){
                       // status1 ? (z--) : (z++);
                       if(status1){
                         z--;
-                        var top2 = Tween.Bounce.easeOut(start2, z, 60 + z, during);
+                        var top2 = Tween.Bounce.easeIn(start2, z, 60 + z, during);
                       }else{
                         z++;
-                        var top2 = Tween.Bounce.easeOut(start2, z, 60 - z, during);
+                        var top2 = Tween.Bounce.easeIn(start2, z, 60 - z, during);
                       }
                       var base64=getDegressMaskData(maskImg_inner,top2);
                       canvasCity_ctx1.putImageData(base64,0,0);  

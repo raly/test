@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html data-use-rem="750"></html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<title>HTML5高尔夫手机游戏</title>
+<style>
+*{margin:0px;padding:0px;}
+.logo{
+    /* width:80%; */
+    margin:auto;
+    margin-top:15px;
+    display:block;
+}
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+body{
+    background: url(img/grey-bg.jpg);
+    background-size: 100% 100%;
+}
+.wrap{
+   width: 640px; height: 960px;
+}
+.test{
+    width: 640px; height: 960px;
+    position:relative;
+}
+.test img{
+    width:100%;
+    height:100%;
+}
+.layout{width:90px;height:10px;position:absolute;top:52%;left:70%;}
+.bar{width:100%;height:100%;position:absolute;
+-webkit-animation-name:loading;				/*要绑定的keyframes的名称，语义化命名最好*/
+-webkit-animation-duration:4s;				/*完成这个动画需要花费的时间*/
+-webkit-animation-timing-function:linear;		/*速度曲线，有快有慢*/
+-webkit-animation-delay:0;				/*延迟动画开始*/
+-webkit-animation-iteration-count:1;			/*动画播放次数，infinite为无限制*/
+-webkit-animation-direction:normal;			/*是否需要反向播放*/
+-webkit-animation-fill-mode:backwards;			/*动画播放完之后的状态，backwards回调到动画最开始画面，forwords 则相反*/
+-webkit-animation-play-state:running;			/*规定动画暂停还是运动*/
+}
+@-webkit-keyframes loading{
+		0%{
+			background-color:#e23263;
+			width:0;
+		}
+		80%{
+			background-color:#e23263;
+			width:80%;
+		}
+		85%{
+			background-color:#e23263;
+			width:85%;
+		}
+		90%{
+			background-color:#e23263;
+			width:90%;
+		}
+		95%{
+			background-color:#e23263;
+			width:95%;
+		}
+		100%{background-color:#e23263;width:100%;}
+}
+.running{
+        height:653px;
+        width:397px;
+        position:absolute;
+        top:155px;
+		left:50%;
+        transform:translateX(-50%);
+        background:url(img/loading.png) no-repeat 0 0;
+        -webkit-animation:run 5000ms steps(1);
+		animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes run {	
+	0% {
+		visibility:visible;
+       	background-position:0;
+    }
+	10% {
+       background-position:-397px 0;
+    }
+	20% {
+       background-position:-794px 0;
+    }
+	30% {
+       background-position:-1191px 0;
+    }
+	40% {
+       background-position:-1588px 0;
+    }
+	50% {
+       background-position:-1985px 0;
+    }
+	60% {
+       background-position:-2382px 0;
+    }
+	70% {
+       background-position:-2779px 0;
+    }
+	80% {
+       background-position:-3176px 0;
+    }	
+	90% {
+       background-position:-3573px 0;
+    }
+	100% {
+       background-position:-3573px 0;
+    }	
+}
+</style>
+</head>
+
+<body>
+<script type="text/javascript" src="js/grid.js"></script>
+<div class="wrap">
+
+    <img src="img/logos.png" class="logo" id="logos"/>
+    <div style="" class="test" id="aaa">
+        <img class="bt-img" src="img/bg.png" />
+        <div class="running" id="bbb"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    //缩放脚本
+    (function(win, width, height){
+        var s = document.getElementById("aaa");
+        var b = document.getElementById("bbb");
+        var l = document.getElementById("logos");
+      var doc = win.document;
+      var clientWidth = s.clientWidth ? s.clientWidth : width;
+      var clientHeight = s.clientHeight ? s.clientHeight : height;
+      var scale =  width/clientWidth  ;
+      
+      s.style['-webkit-transform'] = 'scale(' + scale + ')';
+      s.style['-webkit-transform-origin'] = '0px 0px';
+      l.style['-webkit-transform'] = 'scale(' + scale + ')';
+      l.style['-webkit-transform-origin'] = '0px 0px';
+      // b.style['-webkit-transform'] = 'scale(' + scale + ') translateX(-50%)';
+      // b.style['-webkit-transform-origin'] = '0px 0px';
+      // s.style.height = clientHeight + 'px';
+    })(this, window.document.documentElement.clientWidth , 580);
+</script>
+</body>
+</html>

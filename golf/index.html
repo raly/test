@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html data-use-rem="750"></html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<title>HTML5高尔夫手机游戏</title>
+<!--jQuery-->
+<script type="text/javascript" src="js/createjs.min.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script src="js/common.js"></script>
+<link type="text/css" href="js/common.css" rel="stylesheet" />
+<style>
+
+*{margin:0px;padding:0px;}
+    body,html{padding:0;margin:0;width:100%;height:100%;background:#000;-webkit-tap-highlight-color: transparent;}
+    canvas{width:100%;height:100%;}
+    #container{
+        position:absolute;
+        bottom:0;left:0;width:100%;height:100%;
+    }
+.layout{width:90px;height:10px;position:absolute;top:52%;left:70%;}
+.bar{width:100%;height:100%;position:absolute;
+-webkit-animation-name:loading;				/*要绑定的keyframes的名称，语义化命名最好*/
+-webkit-animation-duration:4s;				/*完成这个动画需要花费的时间*/
+-webkit-animation-timing-function:linear;		/*速度曲线，有快有慢*/
+-webkit-animation-delay:0;				/*延迟动画开始*/
+-webkit-animation-iteration-count:1;			/*动画播放次数，infinite为无限制*/
+-webkit-animation-direction:normal;			/*是否需要反向播放*/
+-webkit-animation-fill-mode:backwards;			/*动画播放完之后的状态，backwards回调到动画最开始画面，forwords 则相反*/
+-webkit-animation-play-state:running;			/*规定动画暂停还是运动*/
+}
+@-webkit-keyframes loading{
+		0%{
+			background-color:#e23263;
+			width:0;
+		}
+		80%{
+			background-color:#e23263;
+			width:80%;
+		}
+		85%{
+			background-color:#e23263;
+			width:85%;
+		}
+		90%{
+			background-color:#e23263;
+			width:90%;
+		}
+		95%{
+			background-color:#e23263;
+			width:95%;
+		}
+		100%{background-color:#e23263;width:100%;}
+}
+.running{
+        height:653px;
+        width:397px;
+        position:absolute;
+        top:155px;
+		left:135px;
+        background:url(img/loading.png) no-repeat 0 0;
+        -webkit-animation:run 5000ms steps(1);
+		animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes run {	
+	0% {
+		visibility:visible;
+       	background-position:0;
+    }
+	10% {
+       background-position:-397px 0;
+    }
+	20% {
+       background-position:-794px 0;
+    }
+	30% {
+       background-position:-1191px 0;
+    }
+	40% {
+       background-position:-1588px 0;
+    }
+	50% {
+       background-position:-1985px 0;
+    }
+	60% {
+       background-position:-2382px 0;
+    }
+	70% {
+       background-position:-2779px 0;
+    }
+	80% {
+       background-position:-3176px 0;
+    }	
+	90% {
+       background-position:-3573px 0;
+    }
+	100% {
+       background-position:-3573px 0;
+    }	
+}
+</style>
+</head>
+
+<body>
+
+<div id="container">
+	<canvas id="canvas"></canvas>
+</div>
+
+<div style="display: none;">
+</div>
+<script src="js/index.js"></script>
+<script src="js/flyline.js"></script>
+<script language=javascript>
+		var mebtnopenurl = 'http://game2.id87.com';
+		window.shareData = {
+		        "imgUrl": "http://game2.id87.com/games/dqe/img/icon.png",
+		        "timeLineLink": "http://game2.id87.com/games/dqe",
+		        "tTitle": "打企鹅-微资源",
+		        "tContent": "打企鹅-微资源"
+		};
+				
+		function goHome(){
+			window.location=mebtnopenurl;
+		}
+		function clickMore(){
+			if((window.location+"").indexOf("zf",1)>0){
+				window.location = "http://game2.id87.com";
+			 }
+			 else{
+				goHome();
+			 }
+		}
+		function dp_share(){
+			document.title ="你简直霸气侧漏，击飞出"+myData.scoreName+"，谁还能超越我？";
+			document.getElementById("share").style.display="";
+			window.shareData.tTitle = document.title;
+		}
+		function dp_Ranking(){
+			window.location=mebtnopenurl;
+		}
+
+		function showAd(){
+		}
+		function hideAd(){
+		}
+		document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+		    
+		    WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+		        WeixinJSBridge.invoke('sendAppMessage', {
+		            "img_url": window.shareData.imgUrl,
+		            "link": window.shareData.timeLineLink,
+		            "desc": window.shareData.tContent,
+		            "title": window.shareData.tTitle
+		        }, onShareComplete);
+		    });
+
+		    WeixinJSBridge.on('menu:share:timeline', function(argv) {
+		        WeixinJSBridge.invoke('shareTimeline', {
+		            "img_url": window.shareData.imgUrl,
+		            "img_width": "640",
+		            "img_height": "640",
+		            "link": window.shareData.timeLineLink,
+		            "desc": window.shareData.tContent,
+		            "title": window.shareData.tTitle
+		        }, onShareComplete);
+		    });
+		}, false);
+		</script>
+		<div id=share style="display: none">
+			<img width=100% src="share.png"
+				style="position: fixed; z-index: 9999; top: 0; left: 0; display: "
+				ontouchstart="document.getElementById('share').style.display='none';" />
+		</div>
+		<div style="display: none;">
+			<script type="text/javascript">
+            var myData = { gameid: "dqe" };
+			window.shareData.timeLineLink = "http://game2.id87.com/games/dqe/index.html?gameid=" + myData.gameid + (localStorage.myuid ? "&uid=" + localStorage.myuid : "");
+			function dp_submitScore(score){
+				myData.score = score*10;
+				myData.scoreName = score+"米";
+				if(score>0){
+					if (confirm("你太猛了，大力出奇迹，一下把伦家击飞"+score+"米！要不要通知一下小伙伴")){
+						dp_share();
+					}
+				}
+			}
+			function onShareComplete(res) {
+                if (localStorage.myuid && myData.score != undefined) {
+                    setTimeout(function(){
+                        if (confirm("要将成绩提交到微资源排行榜吗？")) {
+                            window.location = "http://game2.id87.com/games/dqe/index.html?gameid=" + myData.gameid + "&uid=" + localStorage.myuid + "&score=" + myData.score + "&scorename=" + encodeURIComponent(myData.scoreName);
+                        }
+                        else {
+                            document.location.href = mebtnopenurl;
+                        }
+                    }, 500);
+                }
+				else {
+		        	document.location.href = mebtnopenurl;
+				}
+	        }
+			</script>
+			<div style="display: none;">
+			 
+			</div>
+			<div style="text-align:center;">
+</div>
+</body>
+</html>

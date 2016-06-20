@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html data-use-rem="750"></html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<title>HTML5高尔夫手机游戏</title>
+<style>
+*{margin:0px;padding:0px;}
+.logo{
+    width:80%;
+    margin:auto;
+    margin-top:15px;
+    display:block;
+}
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+body{
+        background: url(img/grey-bg.jpg);
+    background-size: 100% 100%;
+}
+.bottom{
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  width:90%;
+}
+
+.wraps{
+  font-size:12px;
+  padding:.60rem .5rem;
+  box-sizing:border-box;
+}
+.wraps p{
+  line-height:.40rem;
+  margin:.1rem 0px;
+}
+form{
+  margin-top:.4rem;
+}
+span,label{
+  font-weight: bold;
+}
+label{
+  width:60px;
+  display:inline-block;
+}
+input{
+  border:1px solid #bbbbbb;
+  height:.44rem;
+  line-height:.44rem;
+  width:4rem;
+}
+.line{
+  margin:.1rem 0px;
+}
+.btn{
+  display:block;
+  width:150px;
+  height:33px;
+  border:2px solid #b7b7b7;
+  color:#fff;
+  text-align:center;
+  line-height:33px;
+  font-size:16px;
+  background:#d1141b;
+  text-decoration:none;
+  position:absolute;
+  z-index:99;
+  bottom:80px;
+  left:42%;
+}
+</style>
+</head>
+
+<body>
+<script type="text/javascript" src="js/grid.js"></script>
+<div class="wrap">
+
+    <img src="img/logos.png" class="logo" id="logos"/>
+    <div class="wraps">
+      <p>暑假第一个周末，高尔夫球场见！</p>
+      <p>现在就妥妥地填好报名表，来参加7月2日浙江区“<span>quattro杯高尔夫挑战赛</span>”！在您与球友一较高下之余，跟娃也来个高尔夫亲子互动吧，还能获得专业的青少年高尔夫指导，外加有多重好礼相送！</p>
+      <p>开赛在即，现在就来小试牛刀，点下方链接，来场热身赛先！</p>
+      <p><span>活动时间：</span>2016年7月9日 10：00-20：00</p>
+      <p><span>活动地点：</span>宁波启新高尔夫球场</p>
+      <form action="" method="get" accept-charset="utf-8">
+        <div class="line">
+          <label>姓名：</label>
+          <input type="text" />
+        </div>
+        <div class="line">
+          <label>手机号码：</label>
+          <input type="text" />
+        </div>
+        <div class="line">
+          <label>经销商：</label>
+          <input type="text" />
+        </div>
+      </form>
+    </div>
+     <img src="img/a.png" class="bottom" />
+     <a class="btn" href="#">进入游戏</a>
+</div>
+
+</body>
+</html>

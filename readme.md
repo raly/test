@@ -1,2 +1,2 @@
 hello
-test discord hook
+test discord hook.
